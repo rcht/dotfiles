@@ -1,0 +1,216 @@
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 0
+    y: 0
+
+  dynamic_padding: false
+
+  startup_mode: Maximized
+
+  title: Alacritty
+
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 5000
+
+font:
+  normal:
+    family: Roboto Mono
+    style: Regular
+
+  bold:
+    family: Roboto Mono
+    style: Bold
+
+  italic:
+    family: Roboto Mono
+    style: Italic
+
+  bold_italic:
+    family: Roboto Mono
+    style: Bold Italic
+
+  size: 9.0
+
+  offset:
+    x: 0
+    y: 0
+
+draw_bold_text_with_bright_colors: true
+
+schemes:
+  ayu-dark: &ayu-dark
+    primary:
+      background: '#0a0e14'
+      foreground: '#b3b1ad'
+    cursor:
+      text: CellBackground
+      cursor: CellForeground
+    selection:
+      text: CellForeground
+      background: '#3e4451'
+    normal:
+      black:   '#01060e'
+      red:     '#ea6c73'
+      green:   '#91b362'
+      yellow:  '#f9af4f'
+      blue:    '#53bdfa'
+      magenta: '#fae994'
+      cyan:    '#90e1c6'
+      white:   '#c7c7c7'
+    bright:
+      black:   '#686868'
+      red:     '#f07178'
+      green:   '#c2d94c'
+      yellow:  '#ffb454'
+      blue:    '#59c2ff'
+      magenta: '#ffee99'
+      cyan:    '#95e6cb'
+      white:   '#ffffff'
+
+  doom-one: &doom-one
+    primary:
+      background: '#282c34'
+      foreground: '#bbc2cf'
+    cursor:
+      text: CellBackground
+      cursor: '#528bff'
+    selection:
+      text: CellForeground
+      background: '#3e4451'
+    normal:
+      black:   '#1c1f24'
+      red:     '#ff6c6b'
+      green:   '#98be65'
+      yellow:  '#da8548'
+      blue:    '#51afef'
+      magenta: '#c678dd'
+      cyan:    '#5699af'
+      white:   '#202328'
+    bright:
+      black:   '#5b6268'
+      red:     '#da8548'
+      green:   '#4db5bd'
+      yellow:  '#ecbe7b'
+      blue:    '#3071db'   # This is 2257a0 in Doom Emacs but I lightened it.
+      magenta: '#a9a1e1'
+      cyan:    '#46d9ff'
+      white:   '#dfdfdf'
+
+  dracula: &dracula
+    primary:
+      background: '#282a36'
+      foreground: '#fbbc2c'
+    cursor:
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
+    search:
+      matches:
+        foreground: '#44475a'
+        background: '#50fa7b'
+      focused_match:
+        foreground: '#44475a'
+        background: '#ffb86c'
+      bar:
+        background: '#282a36'
+        foreground: '#f8f8f2'
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: CellForeground
+      background: '#44475a'
+    normal:
+      black:   '#000000'
+      red:     '#ff5555'
+      green:   '#50fa7b'
+      yellow:  '#f1fa8c'
+      blue:    '#bd93f9'
+      magenta: '#ff79c6'
+      cyan:    '#8be9fd'
+      white:   '#bfbfbf'
+    bright:
+      black:   '#4d4d4d'
+      red:     '#ff6e67'
+      green:   '#5af78e'
+      yellow:  '#f4f99d'
+      blue:    '#caa9fa'
+      magenta: '#ff92d0'
+      cyan:    '#9aedfe'
+      white:   '#e6e6e6'
+    dim:
+      black:   '#14151b'
+      red:     '#ff2222'
+      green:   '#1ef956'
+      yellow:  '#ebf85b'
+      blue:    '#4d5b86'
+      magenta: '#ff46b0'
+      cyan:    '#59dffc'
+      white:   '#e6e6d1'
+
+  neon-max: &neon-max # an experimental high contrast colorscheme that I'm testing. It's terrible lol
+        primary:
+          background: '#000000'
+          foreground: '#ffffff'
+        cursor:
+          text: CellBackground
+          cursor: '#ffffff'
+        selection:
+          text: CellForeground
+          background: '#ffffff'
+        normal:
+          black:   '#000000'
+          red:     '#dd0000'
+          green:   '#00dd00'
+          yellow:  '#dddd00'
+          blue:    '#0000dd'
+          magenta: '#c900dd'
+          cyan:    '#00dcda'
+          white:   '#ffffff'
+        bright:
+          black:   '#5b6268'
+          red:     '#ff0000'
+          green:   '#00ff00'
+          yellow:  '#ffff00'
+          blue:    '#0000ff'
+          magenta: '#ea00ff'
+          cyan:    '#00fefc'
+          white:   '#ffffff'
+
+colors: *neon-max
+
+background_opacity: 1
+
+cursor:
+  style: Block
+
+shell:
+  program: /usr/bin/zsh
+
+key_bindings:
+  - { key: V,         mods: Control|Shift, action: Paste                       }
+  - { key: C,         mods: Control|Shift, action: Copy                        }
+  - { key: Insert,    mods: Shift,         action: PasteSelection              }
+  - { key: Key0,      mods: Control,       action: ResetFontSize               }
+  - { key: Equals,    mods: Control,       action: IncreaseFontSize            }
+  - { key: Plus,      mods: Control,       action: IncreaseFontSize            }
+  - { key: Minus,     mods: Control,       action: DecreaseFontSize            }
+  - { key: F11,       mods: None,          action: ToggleFullscreen            }
+  - { key: Paste,     mods: None,          action: Paste                       }
+  - { key: Copy,      mods: None,          action: Copy                        }
+  - { key: L,         mods: Control,       action: ClearLogNotice              }
+  - { key: L,         mods: Control,       chars: "\x0c"                       }
+  - { key: PageUp,    mods: None,          action: ScrollPageUp,   mode: ~Alt  }
+  - { key: PageDown,  mods: None,          action: ScrollPageDown, mode: ~Alt  }
+  - { key: Home,      mods: Shift,         action: ScrollToTop,    mode: ~Alt  }
+  - { key: End,       mods: Shift,         action: ScrollToBottom, mode: ~Alt  }
+
