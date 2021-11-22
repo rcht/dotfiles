@@ -4,7 +4,7 @@ export ZSH="/home/rachit/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git vi-mode zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,14 +59,5 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
 
 cal
