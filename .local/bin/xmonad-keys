@@ -1,0 +1,77 @@
+#!/usr/bin/env python
+
+'''
+
+A small python script that prints my xmonad keybindings in a table format. 
+This WILL NOT work with XMonad.Util.EZConfig keybindings and submenus. 
+
+...Or even normal configs, to be completely honest. The loosely tied together 
+text parsing just plain sucks. 
+
+'''
+
+import os
+
+home = os.path.expanduser('~')
+
+def fill(string, length):
+    while len(string)<length:
+        string += " "
+    return string
+
+config = open(f"{home}/.xmonad/xmonad.hs","r")
+
+sloc = []
+for i in config.readlines():
+    if (i.strip()[:2] != "--") and (i.strip()):
+        sloc.append(i.strip())
+
+index = 0
+
+while(sloc[index][:6] != "myKeys"):
+    index+=1
+
+sloc = sloc[index+1:]
+index = 0
+
+while sloc[index]!="]":
+    index += 1
+
+sloc = sloc[:index]
+
+sloc = [i.strip(" ()[],") for i in sloc]
+
+# keybind list with commas to seperate mods
+keys = [''.join(i.split("),")[0].split()).replace("xK_","") for i in sloc]
+
+# convert comma to +
+keys = [' + '.join(i.split(",")) for i in keys]
+
+# convert modkey seperators to +
+keys = [' + '.join(i.split(".|.")) for i in keys]
+
+
+
+keys = [i.replace("modm","Super").replace("shiftMask","Shift") for i in keys]
+
+
+maxkeyspace = max(len(i) for i in keys)
+
+keys = [fill(i, maxkeyspace) for i in keys]
+
+actions = [i.split("),")[1].strip() for i in sloc]
+
+maxactionspace = max(len(i) for i in actions)
+
+actions = [fill(i, maxactionspace) for i in actions]
+
+# table headers
+print('-'*(3+maxkeyspace+maxactionspace))
+print(f"|{fill('Shortcut',maxkeyspace)}|{fill('Action',maxactionspace)}|")
+print('-'*(3+maxkeyspace+maxactionspace))
+# table
+for i in range(len(sloc)):
+    print(f"|{keys[i]}|{actions[i]}|")
+print('-'*(3+maxkeyspace+maxactionspace))
+
+config.close()
