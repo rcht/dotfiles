@@ -1,3 +1,7 @@
+# ---------------
+# OH MY ZSH STUFF
+# ---------------
+
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="/home/rachit/.oh-my-zsh"
@@ -8,14 +12,23 @@ plugins=(git zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+# ---------------------------
+# SHELL ENVIRONMENT VARIABLES
+# ---------------------------
+
 export EDITOR=nvim
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# -------
+# ALIASES
+# -------
 
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias df='df -h'                          
+alias free='free -m'                      
 alias more=less
 alias fucking='sudo'
 alias cls='clear'
@@ -37,6 +50,10 @@ alias gpo='git push origin'
 alias commit='git commit -m'
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+
+# ----------------------
+# FUNCTIONS AND COMMANDS
+# ----------------------
 
 ex ()
 {
