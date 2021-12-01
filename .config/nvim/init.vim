@@ -1,4 +1,6 @@
+" --------
 " Settings
+" --------
 
 set number
 set relativenumber
@@ -22,7 +24,9 @@ set signcolumn=yes
 " set colorcolumn=90
 syntax on
 
+" ----------
 " Remappings
+" ----------
 
 let mapleader = " "
 set timeoutlen=2000
@@ -59,19 +63,20 @@ augroup file_template
     autocmd BufNewFile *.tex 0r ~/.config/nvim/templates/new.tex
 augroup END
 
+
+nnoremap <leader>mk :make<CR>
+
+" ----------------
 " vim-plug plugins
+" ----------------
 
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
-" Plug 'neoclide/coc.nvim', {'branch':'release'}
 Plug 'jiangmiao/auto-pairs'
 Plug 'ThePrimeagen/vim-be-good'
-" Plug 'vim-airline/vim-airline'
-Plug 'itchyny/lightline.vim'
-" Plug 'airblade/vim-gitgutter'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'ayu-theme/ayu-vim'
 Plug 'epmor/hotline-vim'
 Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
@@ -79,21 +84,24 @@ Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
 
-" plugin initiation
+" -----------------
+" Plugin initiation
+" -----------------
 
 let ayucolor="dark"
-" colorscheme ayu
+colorscheme ayu
 " colorscheme gruvbox
-colorscheme hotline
-" highlight Normal guibg=none
+" colorscheme hotline
+highlight Normal guibg=none
 
 lua require'colorizer'.setup()
 
 let g:minimap_width = 10
-" let g:minimap_auto_start = 1
 
 
+" ---------
 " LSP setup 
+" ---------
 
 lua << EOF
 require'lspconfig'.clangd.setup{} 
@@ -144,9 +152,6 @@ local check_back_space = function()
     end
 end
 
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
@@ -162,7 +167,6 @@ _G.s_tab_complete = function()
   elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
     return t "<Plug>(vsnip-jump-prev)"
   else
-    -- If <S-Tab> is not working in your terminal, change it to <C-h>
     return t "<S-Tab>"
   end
 end

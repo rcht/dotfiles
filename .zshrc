@@ -77,4 +77,9 @@ ex ()
   fi
 }
 
+# the file lognumber stores the number of times I've logged in to bash/zsh, and everytime this bashrc is run, that number is updated.
+[ ! -e ~/lognumber ] && echo 0 > ~/lognumber
+expr $(cat ~/lognumber) + 1 > ~/lognumber
+echo -e "$(cat ~/lognumber) logins so far\n"
+
 cal

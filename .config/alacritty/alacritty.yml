@@ -21,19 +21,19 @@ scrolling:
 
 font:
   normal:
-    family: Roboto Mono
+    family: Tamzen
     style: Regular
 
   bold:
-    family: Roboto Mono
+    family: Tamzen
     style: Bold
 
   italic:
-    family: Roboto Mono
+    family: Tamzen
     style: Italic
 
   bold_italic:
-    family: Roboto Mono
+    family: Tamzen
     style: Bold Italic
 
   size: 9.0
@@ -188,7 +188,7 @@ schemes:
 
 colors: *neon-max
 
-background_opacity: 1
+background_opacity: 0.95
 
 cursor:
   style: Block
