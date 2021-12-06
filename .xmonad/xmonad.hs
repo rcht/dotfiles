@@ -1,13 +1,7 @@
 import XMonad
 import System.Directory
 import System.IO (hPutStrLn)
-import System.Exit (exitSuccess)
 
--- requires xmonad-extras
--- BROKEN AFTER STABLE UPDATE, NEED TO FIX
--- UPDATE: FIXED
--- i fucking hate manjaro
-import XMonad.Actions.Volume
 import XMonad.Actions.CycleWS
 
 import XMonad.Hooks.ManageDocks
@@ -17,9 +11,6 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.Magnifier
 import XMonad.Layout.Spacing
 import XMonad.Layout.ShowWName
--- import XMonad.Layout.Tabbed
--- import XMonad.Layout.Spiral
--- import XMonad.Layout.SimpleFloat
 
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -152,13 +143,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
     -- Lower volume
-    , ((0, xK_F2), lowerVolume 5 >> return ())
+    , ((0, xK_F2), spawn "amixer -q sset Master 3%-")
 
     -- Raise volume
-    , ((0, xK_F3), raiseVolume 5 >> return ())
+    , ((0, xK_F3), spawn "amixer -q sset Master 3%+")
 
     -- Toggle mute 
-    , ((0, xK_F1), toggleMute >> return ())
+    , ((0, xK_F1), spawn "amixer -D pulse set Master 1+ toggle" )
     ]
     ++
 
@@ -218,7 +209,7 @@ myLayout =  magnifierOff $ showWName' mySWNConfig $ myDefaultSpacing $ myDefault
     myDefaultGaps = gaps [(U, 24), (L, 7), (R, 7), (D, 7)] 
 
     --- Make a default layout so it's easy to add modifiers. 
-    myDefaultLayout = (tiled ||| Mirror tiled ||| Full )
+    myDefaultLayout = tiled ||| Mirror tiled ||| Full
 
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
@@ -281,7 +272,7 @@ main = do
             ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>",
             ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!",
             ppExtras  = [],
-            ppOrder  = \(ws:l:t:ex) -> [ws]++[l]
+            ppOrder  = \(ws:l:t:ex) -> ws:[l]
         },
         startupHook        = myStartupHook
     }

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+langs=`echo "cpp c python haskell" | tr ' ' '\n'`
+coreutils=`echo "awk sed xargs find" | tr ' ' '\n'`
+
+selected=`printf "$langs\n$coreutils" | fzf`
+read -p "query: " query
+
+if printf $langs | grep -qs $selected; then
+    curl cht.sh/$selected/`echo $query | tr ' ' '+'`
+else
+    curl cht.sh/$selected~$query
+fi
+
+
