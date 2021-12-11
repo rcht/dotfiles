@@ -2,7 +2,7 @@
 " Settings
 " --------
 
-set number
+" set number
 set relativenumber
 
 set noswapfile
@@ -51,6 +51,7 @@ function! CommentToggle()
 endfunction
 
 nnoremap <leader>c :call CommentToggle()<CR>j
+nnoremap <leader>fb :ClangFormat<CR>
 " map <leader>cu :call CommentToggle()<CR>k
 nnoremap <leader>t :MinimapToggle<CR>
 
@@ -76,6 +77,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ThePrimeagen/vim-be-good'
+Plug 'rhysd/vim-clang-format'
 Plug 'gruvbox-community/gruvbox'
 Plug 'ayu-theme/ayu-vim'
 Plug 'epmor/hotline-vim'

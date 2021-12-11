@@ -6,11 +6,13 @@ import XMonad.Actions.CycleWS
 
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.WindowSwallowing
 
 import XMonad.Layout.Gaps
 import XMonad.Layout.Magnifier
 import XMonad.Layout.Spacing
 import XMonad.Layout.ShowWName
+import XMonad.Layout.SimplestFloat
 
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
@@ -100,13 +102,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_b     ), spawn "firefox &")
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
 
     -- Restart xmonad
     , ((modm .|. shiftMask , xK_h     ), spawn "xmonad --recompile; xmonad --restart")
 
     -- toggle gaps
-    , ((modm .|. shiftMask , xK_g ), sendMessage $ ToggleGaps)
+    , ((modm .|. shiftMask , xK_g ), sendMessage ToggleGaps)
 
     -- xmonad-keys
     , ((modm , xK_a ), spawn "xmonad-keys-gui")
@@ -194,22 +196,22 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 mySWNConfig :: SWNConfig
 mySWNConfig = def{
-    swn_font = "xft:Hack:bold:size=50"
-    , swn_fade = 1
-    , swn_bgcolor = "#1c1f24"
+    swn_font = "xft:Fira Code:bold:size=50"
+    , swn_fade = 0.25
+    , swn_bgcolor = "#000000"
     , swn_color = "#ffffff"
 }
 
-myLayout =  magnifierOff $ showWName' mySWNConfig $ myDefaultSpacing $ myDefaultGaps $ avoidStruts myDefaultLayout
+myLayout =  magnifierOff $ showWName' mySWNConfig $  myDefaultGaps $ avoidStruts myDefaultLayout
   where
     -- spacing between windows
-    myDefaultSpacing = spacingRaw True (Border 0 2 2 2) True (Border 2 2 2 2) True
+    -- myDefaultSpacing = spacingRaw True (Border 0 2 2 2) True (Border 2 2 2 2) True
 
     -- Gap left on the side of windows 
-    myDefaultGaps = gaps [(U, 24), (L, 7), (R, 7), (D, 7)] 
+    myDefaultGaps = gaps [(U, 20), (L, 0), (R, 0), (D, 0)] 
 
     --- Make a default layout so it's easy to add modifiers. 
-    myDefaultLayout = tiled ||| Mirror tiled ||| Full
+    myDefaultLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat
 
     -- default tiling algorithm partitions the screen into two panes
     tiled   = Tall nmaster delta ratio
@@ -229,20 +231,22 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
-myEventHook = mempty
+myEventHook = swallowEventHook (className =? "Alacritty") (return True)
+-- myEventHook = mempty
 
 
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
-    spawnOnce "picom &"
+    -- spawnOnce "picom &"
     spawnOnce "dunst &"
-    spawnOnce "volumeicon &"
-    spawnOnce "killall trayer; exec trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 21 --widthtype percent --width 4 --alpha 0 --tint 0x000000"
-    spawnOnce "nm-applet &"
+    -- spawnOnce "volumeicon &"
+    -- spawnOnce "killall trayer; exec trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 21 --widthtype percent --width 4 --alpha 0 --tint 0x000000"
+    -- spawnOnce "nm-applet &"
+    spawnOnce "~/.local/bin/wifi-connect &"
 
 main = do
     xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"
-    xmonad $ docks defaultConfig{
+    xmonad $ docks def{
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

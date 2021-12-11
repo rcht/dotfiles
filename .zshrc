@@ -36,6 +36,7 @@ alias ytdl='youtube-dl'
 alias audl='youtube-dl -x --audio-format mp3'
 alias vimrc='nvim ~/.config/nvim/init.vim'
 alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
+alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
 alias emurc="nvim ~/.config/alacritty/alacritty.yml"
 alias wmrc="nvim ~/.xmonad/xmonad.hs"
 alias cowsay='/usr/bin/cowsay'
@@ -48,6 +49,7 @@ alias gst='git status'
 alias gl='git log'
 alias gpo='git push origin'
 alias commit='git commit -m'
+alias linedo="xargs -d '\n' -I {}"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
