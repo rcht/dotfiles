@@ -237,7 +237,7 @@ myEventHook = swallowEventHook (className =? "Alacritty") (return True)
 
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
-    -- spawnOnce "picom &"
+    spawnOnce "picom &"
     spawnOnce "dunst &"
     -- spawnOnce "volumeicon &"
     -- spawnOnce "killall trayer; exec trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 21 --widthtype percent --width 4 --alpha 0 --tint 0x000000"
@@ -273,7 +273,7 @@ main = do
             ppHidden = xmobarColor "#ccff00" "",
             ppHiddenNoWindows = xmobarColor "#918db1" "",
             ppTitle = xmobarColor "#ffffff" "" . shorten 50,
-            ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>",
+            ppSep =  "  ",
             ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!",
             ppExtras  = [],
             ppOrder  = \(ws:l:t:ex) -> ws:[l]

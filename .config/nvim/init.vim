@@ -2,7 +2,7 @@
 " Settings
 " --------
 
-" set number
+set number
 set relativenumber
 
 set noswapfile
@@ -15,13 +15,13 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set scrolloff=10
+set cursorline
 
 set nohlsearch
 set noerrorbells
 set termguicolors " colorizer requires this
 
 set signcolumn=yes
-" set colorcolumn=90
 syntax on
 
 " ----------
@@ -52,7 +52,6 @@ endfunction
 
 nnoremap <leader>c :call CommentToggle()<CR>j
 nnoremap <leader>fb :ClangFormat<CR>
-" map <leader>cu :call CommentToggle()<CR>k
 nnoremap <leader>t :MinimapToggle<CR>
 
 " file skeletons
@@ -76,11 +75,15 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'jiangmiao/auto-pairs'
+Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
+Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'gruvbox-community/gruvbox'
+Plug 'sheerun/vim-polyglot'
 Plug 'ayu-theme/ayu-vim'
 Plug 'epmor/hotline-vim'
+Plug 'itchyny/lightline.vim'
 Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 Plug 'norcalli/nvim-colorizer.lua'
 
@@ -90,15 +93,21 @@ call plug#end()
 " Plugin initiation
 " -----------------
 
-let ayucolor="dark"
-colorscheme ayu
-" colorscheme gruvbox
-" colorscheme hotline
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+colorscheme gruvbox
 highlight Normal guibg=none
+highlight clear SignColumn
 
 lua require'colorizer'.setup()
 
 let g:minimap_width = 10
+
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
 
 
 " ---------
@@ -108,7 +117,7 @@ let g:minimap_width = 10
 lua << EOF
 require'lspconfig'.clangd.setup{} 
 require'lspconfig'.hls.setup{}
-require'lspconfig'.pylsp.setup{}
+-- require'lspconfig'.pylsp.setup{}
 require'lspconfig'.texlab.setup{}
 
 vim.o.completeopt = "menuone,noselect"
@@ -177,10 +186,4 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
-
--- function show_status()
---     local diagnostics = vim.diagnostic.get()
---     if not next(diagnostics) then return end
---     return diagnostics[1].message
--- end
 EOF

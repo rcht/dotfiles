@@ -14,5 +14,5 @@ Config { font = "-misc-fixed-*-*-*-*-14-*-*-*-*-*-*-*"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/rachit/.xmonad/haskell.xpm/> <fc=#666666>|</fc> %UnsafeStdinReader% }{ <fc=#ff1a00> %uptime% </fc><fc=#ff8d00> %wlp0s20f3wi% </fc><fc=#e3ff00> %cpu% </fc><fc=#00ff04> %battery% </fc><fc=#0051ff> %date% </fc>"
+       , template = "<icon=/home/rachit/.xmonad/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#ff1a00> %uptime% </fc><fc=#ff8d00> %wlp0s20f3wi% </fc><fc=#e3ff00> %cpu% </fc><fc=#00ff04> %battery% </fc><fc=#0051ff> %date% </fc>"
        }
