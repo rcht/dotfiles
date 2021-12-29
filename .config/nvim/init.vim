@@ -39,8 +39,7 @@ imap kj <Esc>
 let b:comment_leader = '#'
 augroup comment_chars
     autocmd!
-    autocmd Filetype c,cpp,rust let b:comment_leader = '//'
-    autocmd Filetype sh,python let b:comment_leader = '#'
+    autocmd Filetype c,cpp,rust,javascript let b:comment_leader = '//'
     autocmd Filetype vim let b:comment_leader = '"'
     autocmd Filetype haskell let b:comment_leader = '--'
 augroup END
@@ -52,7 +51,7 @@ endfunction
 
 nnoremap <leader>c :call CommentToggle()<CR>j
 nnoremap <leader>fb :ClangFormat<CR>
-nnoremap <leader>t :MinimapToggle<CR>
+" nnoremap <leader>t :MinimapToggle<CR>
 
 " file skeletons
 augroup file_template
@@ -78,13 +77,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
-Plug 'lukas-reineke/indent-blankline.nvim'
+" Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'gruvbox-community/gruvbox'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'ayu-theme/ayu-vim'
-Plug 'epmor/hotline-vim'
+" Plug 'epmor/hotline-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
@@ -116,8 +115,9 @@ let g:lightline = {
 
 lua << EOF
 require'lspconfig'.clangd.setup{} 
-require'lspconfig'.hls.setup{}
+-- require'lspconfig'.hls.setup{}
 -- require'lspconfig'.pylsp.setup{}
+-- require'lspconfig'.pyright.setup{}
 require'lspconfig'.texlab.setup{}
 
 vim.o.completeopt = "menuone,noselect"
@@ -139,8 +139,8 @@ require'compe'.setup {
   source = {
     path = true;
     buffer = true;
-    calc = true;
-    vsnip = true;
+    calc = false;
+    vsnip = false;
     nvim_lsp = true;
     nvim_lua = true;
     spell = true;

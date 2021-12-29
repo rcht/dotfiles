@@ -32,8 +32,8 @@ alias free='free -m'
 alias more=less
 alias fucking='sudo'
 alias cls='clear'
-alias ytdl='youtube-dl'
-alias audl='youtube-dl -x --audio-format mp3'
+alias ytdl='yt-dlp'
+alias audl='yt-dlp -x --audio-format mp3'
 alias vimrc='nvim ~/.config/nvim/init.vim'
 alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
 alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
@@ -44,12 +44,13 @@ alias vim=nvim
 alias ls='exa --group-directories-first -a ' 
 alias screenshot="flameshot full -c -p ~/Pictures/screenshots/"
 alias speedtest='curl https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
-alias mskill='killall teams-for-linux; killall alacritty'
+alias mskill='killall teams-for-linux;'
 alias gst='git status'
 alias gl='git log'
 alias gpo='git push origin'
 alias commit='git commit -m'
 alias linedo="xargs -d '\n' -I {}"
+alias clock='tty-clock'
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 

@@ -21,22 +21,22 @@ scrolling:
 
 font:
   normal:
-    family: Fira Code
+    family: Tamzen
     style: Regular
 
   bold:
-    family: Fira Code
+    family: Tamzen
     style: Bold
 
   italic:
-    family: Fira Code
+    family: Tamzen
     style: Italic
 
   bold_italic:
-    family: Fira Code
+    family: Tamzen
     style: Bold Italic
 
-  size: 7.0
+  size: 9.0
 
   offset:
     x: 0

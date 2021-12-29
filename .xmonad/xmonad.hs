@@ -28,7 +28,7 @@ myTerminal      = "alacritty"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
-myBorderWidth   = 3
+myBorderWidth   = 1
 
 myModMask       = mod4Mask
 
@@ -36,7 +36,7 @@ myModMask       = mod4Mask
 myWorkspaces    = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
 
 myNormalBorderColor  = "#222222"
-myFocusedBorderColor = "#723757"
+myFocusedBorderColor = "#ff0000"
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
@@ -202,13 +202,13 @@ mySWNConfig = def{
     , swn_color = "#ffffff"
 }
 
-myLayout =  magnifierOff $ showWName' mySWNConfig $  myDefaultGaps $ avoidStruts myDefaultLayout
+myLayout =  magnifierOff $ showWName' mySWNConfig  $ avoidStruts myDefaultLayout
   where
     -- spacing between windows
     -- myDefaultSpacing = spacingRaw True (Border 0 2 2 2) True (Border 2 2 2 2) True
 
     -- Gap left on the side of windows 
-    myDefaultGaps = gaps [(U, 20), (L, 0), (R, 0), (D, 0)] 
+    -- myDefaultGaps = gaps [(U, 20), (L, 0), (R, 0), (D, 0)] 
 
     --- Make a default layout so it's easy to add modifiers. 
     myDefaultLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat
