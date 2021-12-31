@@ -243,6 +243,7 @@ myStartupHook = do
     -- spawnOnce "killall trayer; exec trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --height 21 --widthtype percent --width 4 --alpha 0 --tint 0x000000"
     -- spawnOnce "nm-applet &"
     spawnOnce "~/.local/bin/wifi-connect &"
+    spawnOnce "yakuake &"
 
 main = do
     xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"

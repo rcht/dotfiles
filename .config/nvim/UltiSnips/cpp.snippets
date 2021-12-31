@@ -1,0 +1,54 @@
+snippet fori "iterate over i" b
+for(int i = 0; i < ${1:count}; ++i){
+	$2
+}
+endsnippet
+
+snippet forj "iterate over j" b
+for(int j = 0; j < ${1:count}; ++j){
+	$2
+}
+endsnippet
+
+snippet ffori "iterate i to 0" b
+for(int i = ${1:count}; i >= 0; --i){
+	$2
+}
+endsnippet
+
+snippet mii "map int int" b
+map<int,int> $1
+endsnippet
+
+snippet msi "map string int" b
+map<string, int> $1
+endsnippet
+
+snippet inc "include" b
+#include <${1:iostream}>
+endsnippet
+
+snippet cptemp "template" b
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef unsigned long long ull;
+const char newl = '\n';
+const int MOD = 1e9 + 7;
+
+void solve(){}
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    $1int t; cin >> t; while(t--) solve();
+    // solve();
+}
+/*
+ *
+ *
+ *
+ */
+endsnippet
