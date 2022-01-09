@@ -1,4 +1,4 @@
-Config { font = "-misc-fixed-*-*-*-*-14-*-*-*-*-*-*-*"
+Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
        , bgColor = "black"
        , fgColor = "grey"
        , position = Top

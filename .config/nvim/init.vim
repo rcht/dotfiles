@@ -51,7 +51,8 @@ endfunction
 
 nnoremap <leader>c :call CommentToggle()<CR>j
 nnoremap <leader>fb :ClangFormat<CR>
-" nnoremap <leader>t :MinimapToggle<CR>
+" yank buffer  
+nnoremap <leader>yb :%w !xclip -i -sel c<CR> 
 
 " file skeletons
 augroup file_template
@@ -115,9 +116,6 @@ let g:lightline = {
 
 lua << EOF
 require'lspconfig'.clangd.setup{} 
--- require'lspconfig'.hls.setup{}
--- require'lspconfig'.pylsp.setup{}
--- require'lspconfig'.pyright.setup{}
 require'lspconfig'.texlab.setup{}
 
 vim.o.completeopt = "menuone,noselect"

@@ -41,6 +41,7 @@ alias emurc="nvim ~/.config/alacritty/alacritty.yml"
 alias wmrc="nvim ~/.xmonad/xmonad.hs"
 alias cowsay='/usr/bin/cowsay'
 alias vim=nvim
+alias vi="/usr/bin/vim"
 alias ls='exa --group-directories-first -a ' 
 alias screenshot="flameshot full -c -p ~/Pictures/screenshots/"
 alias speedtest='curl https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
