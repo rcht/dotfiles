@@ -8,7 +8,7 @@ export ZSH="/home/rachit/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(you-should-use git zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -52,6 +52,8 @@ alias gpo='git push origin'
 alias commit='git commit -m'
 alias linedo="xargs -d '\n' -I {}"
 alias clock='tty-clock'
+alias disconnect="nmcli con down id \"\$(nmcli d | tail -n3 | head -n1 | awk '{for (i = 4; i <= NF; i++) print \$i}')\""
+alias wifi-name="nmcli d"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
@@ -87,3 +89,5 @@ expr $(cat ~/lognumber) + 1 > ~/lognumber
 echo -e "$(cat ~/lognumber) logins so far\n"
 
 cal
+
+printf "\nPadhle Bsdk\n"

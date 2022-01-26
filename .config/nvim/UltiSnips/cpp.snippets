@@ -24,6 +24,14 @@ snippet msi "map string int" b
 map<string, int> $1
 endsnippet
 
+snippet mci "map char int" b
+map<char, int> $1
+endsnippet
+
+snippet vec "std::vector" b
+vector<${1:int}>
+endsnippet
+
 snippet inc "include" b
 #include <${1:iostream}>
 endsnippet
@@ -33,9 +41,11 @@ snippet cptemp "template" b
 
 using namespace std;
 
+typedef long long ll;
 typedef unsigned long long ull;
 const char newl = '\n';
 const int MOD = 1e9 + 7;
+#define CEIL(m,n) ((m)/(n))+(((m)%(n))!=0)
 
 void solve(){}
 

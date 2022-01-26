@@ -1,9 +1,11 @@
-import XMonad
 import System.Directory
 import System.IO (hPutStrLn)
+import XMonad
 import XMonad.Actions.CycleWS
-import XMonad.Hooks.ManageDocks
+-- import XMonad.Actions.MouseGestures
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WindowSwallowing
 import XMonad.Layout.Gaps
 import XMonad.Layout.Magnifier
@@ -23,11 +25,11 @@ import qualified Data.Map        as M
 myTerminal      = "alacritty"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
-myBorderWidth   = 1
+myBorderWidth   = 2
 myModMask       = mod4Mask
 myWorkspaces    = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
 myNormalBorderColor  = "#222222"
-myFocusedBorderColor = "#ff0000"
+myFocusedBorderColor = "#989898"
 
 
 
@@ -40,6 +42,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_p     ), spawn "rofi-pdf")
     , ((modm , xK_q     ), kill)
     , ((modm,               xK_space ), sendMessage NextLayout)
+    , ((modm .|. controlMask, xK_t), sendMessage ToggleStruts)
     , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
     , ((modm,               xK_n     ), refresh)
     , ((modm,               xK_Tab   ), windows W.focusDown)
@@ -86,12 +89,24 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
 
+-- gestures = M.fromList
+  -- [ ( [ L ], \_ -> nextWS )
+  -- , ( [ U ], \_ -> nextWS )
+  -- , ( [ R ], \_ -> prevWS )
+  -- , ( [ D ], \_ -> prevWS )
+  -- ]
+
+
+
+
+
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
                                        >> windows W.shiftMaster))
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
+    -- , ((0, button1), mouseGesture gestures)
     ]
 
 
@@ -145,7 +160,7 @@ myStartupHook = do
 
 main = do
     xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"
-    xmonad $ docks def{
+    xmonad $ ewmh $ docks $ def{
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,

@@ -6,6 +6,7 @@ set number
 set relativenumber
 
 set noswapfile
+set exrc
 
 set showcmd
 set nowrap
@@ -78,13 +79,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
-" Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'gruvbox-community/gruvbox'
-" Plug 'sheerun/vim-polyglot'
 Plug 'ayu-theme/ayu-vim'
-" Plug 'epmor/hotline-vim'
 Plug 'itchyny/lightline.vim'
-" Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
 Plug 'norcalli/nvim-colorizer.lua'
 
 call plug#end()
@@ -102,8 +99,6 @@ highlight Normal guibg=none
 highlight clear SignColumn
 
 lua require'colorizer'.setup()
-
-let g:minimap_width = 10
 
 let g:lightline = {
       \ 'colorscheme': 'one',
