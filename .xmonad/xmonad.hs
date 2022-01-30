@@ -1,33 +1,39 @@
 import System.Directory
 import System.IO (hPutStrLn)
+
 import XMonad
+
 import XMonad.Actions.CycleWS
--- import XMonad.Actions.MouseGestures
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.WindowSwallowing
+
 import XMonad.Layout.Gaps
 import XMonad.Layout.Magnifier
 import XMonad.Layout.Spacing
 import XMonad.Layout.ShowWName
 import XMonad.Layout.SimplestFloat
+
 import XMonad.Util.Run
 import XMonad.Util.SpawnOnce
+
 import Data.Monoid
 import System.Exit
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
+
+import qualified XMonad.StackSet    as W
+import qualified Data.Map           as M
 
 
 
 
-myTerminal      = "alacritty"
-myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = True
-myBorderWidth   = 2
-myModMask       = mod4Mask
-myWorkspaces    = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
+myTerminal           = "alacritty"
+myFocusFollowsMouse  :: Bool
+myFocusFollowsMouse  = True
+myBorderWidth        = 2
+myModMask            = mod4Mask
+myWorkspaces         = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
 myNormalBorderColor  = "#222222"
 myFocusedBorderColor = "#989898"
 
@@ -36,46 +42,43 @@ myFocusedBorderColor = "#989898"
 
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm , xK_t), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_p     ), spawn "LC_CTYPE=en_US.utf8 rofi -show run")
-    , ((modm .|. shiftMask ,   xK_b ), spawn "LC_CTYPE=en_US.utf8 rofi-bluetooth")
-    , ((modm .|. shiftMask, xK_p     ), spawn "rofi-pdf")
-    , ((modm , xK_q     ), kill)
-    , ((modm,               xK_space ), sendMessage NextLayout)
-    , ((modm .|. controlMask, xK_t), sendMessage ToggleStruts)
-    , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-    , ((modm,               xK_n     ), refresh)
-    , ((modm,               xK_Tab   ), windows W.focusDown)
-    , ((modm,               xK_j     ), windows W.focusDown)
-    , ((modm,               xK_k     ), windows W.focusUp  )
-    , ((modm,               xK_m     ), windows W.focusMaster  )
-    , ((modm,               xK_Return), windows W.swapMaster)
-    , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-    , ((modm,               xK_h     ), sendMessage Shrink)
-    , ((modm,               xK_l     ), sendMessage Expand)
-    , ((modm .|. shiftMask,               xK_Return     ), withFocused $ windows . W.sink)
-    , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
-    , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
-    , ((modm              , xK_b     ), spawn "firefox &")
-    , ((modm .|. shiftMask, xK_q     ), io exitSuccess)
-    , ((modm .|. shiftMask , xK_h     ), spawn "xmonad --recompile; xmonad --restart")
-    , ((modm .|. shiftMask , xK_g ), sendMessage ToggleGaps)
-    , ((modm , xK_a ), spawn "xmonad-keys-gui")
-    , ((modm, xK_c ), spawn "flameshot full -c -p $HOME/Pictures/screenshots/ &")
-    , ((modm .|. shiftMask, xK_c), spawn "flameshot gui")
-    , ((modm .|. shiftMask, xK_a), spawn "killall flameshot")
-    , ((modm .|. controlMask, xK_plus), sendMessage MagnifyMore)
-    , ((modm .|. controlMask, xK_minus), sendMessage MagnifyLess)
-    , ((modm .|. controlMask   , xK_o    ), sendMessage ToggleOff  )
-    , ((modm .|. controlMask .|. shiftMask, xK_o    ), sendMessage ToggleOn   )
-    , ((modm .|. controlMask              , xK_m    ), sendMessage Toggle     )
-    , ((modm .|. shiftMask, xK_Right), shiftToNext )
-    , ((modm .|. shiftMask, xK_Left), shiftToPrev )
-    ,((modm , xK_g), spawn "~/.local/bin/GalaxyBudsClient_Linux_64bit_Portable.bin &")
-    , ((0, xK_F2), spawn "amixer -q sset Master 3%-")
-    , ((0, xK_F3), spawn "amixer -q sset Master 3%+")
-    , ((0, xK_F1), spawn "amixer -D pulse set Master 1+ toggle" )
+    [ ((modm                , xK_t     ), spawn $ XMonad.terminal conf)
+    , ((modm                , xK_p     ), spawn "LC_CTYPE=en_US.utf8 rofi -show run"         )
+    , ((modm .|. shiftMask  , xK_b     ), spawn "LC_CTYPE=en_US.utf8 rofi-bluetooth"         )
+    , ((modm .|. shiftMask  , xK_p     ), spawn "rofi-pdf"                                   )
+    , ((modm                , xK_q     ), kill                                               )
+    , ((modm                , xK_space ), sendMessage NextLayout                             )
+    , ((modm .|. controlMask, xK_t     ), sendMessage ToggleStruts                           )
+    , ((modm .|. shiftMask  , xK_space ), setLayout $ XMonad.layoutHook conf                 )
+    , ((modm                , xK_n     ), refresh                                            )
+    , ((modm                , xK_Tab   ), windows W.focusDown                                )
+    , ((modm                , xK_j     ), windows W.focusDown                                )
+    , ((modm                , xK_k     ), windows W.focusUp                                  )
+    , ((modm                , xK_m     ), windows W.focusMaster                              )
+    , ((modm                , xK_Return), windows W.swapMaster                               )
+    , ((modm .|. shiftMask  , xK_j     ), windows W.swapDown                                 )
+    , ((modm .|. shiftMask  , xK_k     ), windows W.swapUp                                   )
+    , ((modm                , xK_h     ), sendMessage Shrink                                 )
+    , ((modm                , xK_l     ), sendMessage Expand                                 )
+    , ((modm .|. shiftMask  , xK_Return), withFocused $ windows . W.sink                     )
+    , ((modm                , xK_comma ), sendMessage (IncMasterN 1)                         )
+    , ((modm                , xK_period), sendMessage (IncMasterN (-1))                      )
+    , ((modm                , xK_b     ), spawn "firefox &"                                  )
+    , ((modm .|. shiftMask  , xK_q     ), io exitSuccess                                     )
+    , ((modm .|. shiftMask  , xK_h     ), spawn "xmonad --recompile; xmonad --restart"       )
+    , ((modm .|. shiftMask  , xK_g     ), sendMessage ToggleGaps                             )
+    , ((modm                , xK_a     ), spawn "xmonad-keys-gui"                            )
+    , ((modm .|. shiftMask  , xK_c     ), spawn "flameshot gui"                              )
+    , ((modm .|. shiftMask  , xK_a     ), spawn "killall flameshot"                          )
+    , ((modm .|. controlMask, xK_plus  ), sendMessage MagnifyMore                            )
+    , ((modm .|. controlMask, xK_minus ), sendMessage MagnifyLess                            )
+    , ((modm .|. controlMask, xK_m     ), sendMessage Toggle                                 )
+    , ((modm .|. shiftMask  , xK_Right ), shiftToNext                                        )
+    , ((modm .|. shiftMask  , xK_Left  ), shiftToPrev                                        )
+    , ((modm                , xK_g     ), spawn "GalaxyBudsClient_Linux_64bit_Portable.bin &")
+    , ((0                   , xK_F2    ), spawn "amixer -q sset Master 3%-"                  )
+    , ((0                   , xK_F3    ), spawn "amixer -q sset Master 3%+"                  )
+    , ((0                   , xK_F1    ), spawn "amixer -D pulse set Master 1+ toggle"       )
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -123,9 +126,14 @@ mySWNConfig = def{
 
 
 
-myLayout =  magnifierOff $ showWName' mySWNConfig  $ avoidStruts myDefaultLayout
+myLayout =  magnifierOff 
+         $  showWName' mySWNConfig  
+         $  avoidStruts myDefaultLayout
   where
-    myDefaultLayout = tiled ||| Mirror tiled ||| Full ||| simplestFloat
+    myDefaultLayout = tiled 
+                  ||| Mirror tiled 
+                  ||| Full 
+                  ||| simplestFloat
     tiled   = Tall nmaster delta ratio
     nmaster = 1
     ratio   = 1/2
@@ -161,31 +169,31 @@ myStartupHook = do
 main = do
     xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"
     xmonad $ ewmh $ docks $ def{
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
+        terminal           = myTerminal          ,
+        focusFollowsMouse  = myFocusFollowsMouse ,
+        borderWidth        = myBorderWidth       ,
+        modMask            = myModMask           ,
+        workspaces         = myWorkspaces        ,
+        normalBorderColor  = myNormalBorderColor ,
         focusedBorderColor = myFocusedBorderColor,
 
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
+        keys               = myKeys              ,
+        mouseBindings      = myMouseBindings     ,
 
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+        layoutHook         = myLayout            ,
+        manageHook         = myManageHook        ,
+        handleEventHook    = myEventHook         ,
         logHook            = dynamicLogWithPP $ xmobarPP {
-            ppOutput = hPutStrLn xmproc,
-            ppCurrent = xmobarColor "#ccff00" "" . wrap "[" "]",
-            ppVisible = xmobarColor "#ccff00" "",
-            ppHidden = xmobarColor "#ccff00" "",
-            ppHiddenNoWindows = xmobarColor "#918db1" "",
-            ppTitle = xmobarColor "#ffffff" "" . shorten 50,
-            ppSep =  "  ",
-            ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!",
-            ppExtras  = [],
-            ppOrder  = \(ws:l:t:ex) -> ws:[l]
+            ppOutput          = hPutStrLn xmproc,
+            ppCurrent         = xmobarColor "#ccff00" "" . wrap "[" "]",
+            ppVisible         = xmobarColor "#ccff00" ""               ,
+            ppHidden          = xmobarColor "#ccff00" ""               ,
+            ppHiddenNoWindows = xmobarColor "#918db1" ""               ,
+            ppTitle           = xmobarColor "#ffffff" "" . shorten 50  ,
+            ppSep             =  "  "                                  ,
+            ppUrgent          = xmobarColor "#C45500" "" . wrap "!" "!",
+            ppExtras          = []                                     ,
+            ppOrder           = \(ws:l:t:ex) -> ws:[l]
         },
         startupHook        = myStartupHook
     }
