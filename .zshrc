@@ -83,6 +83,13 @@ ex ()
   fi
 }
 
+makescript()
+{
+    printf "#!/usr/bin/env bash" > $1
+    chmod +x $1
+    $EDITOR $1
+}
+
 # the file lognumber stores the number of times I've logged in to bash/zsh, and everytime this bashrc is run, that number is updated.
 [ ! -e ~/lognumber ] && echo 0 > ~/lognumber
 expr $(cat ~/lognumber) + 1 > ~/lognumber

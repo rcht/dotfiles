@@ -4,6 +4,7 @@ import System.IO (hPutStrLn)
 import XMonad
 
 import XMonad.Actions.CycleWS
+import XMonad.Actions.NoBorders
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -24,31 +25,41 @@ import System.Exit
 
 import qualified XMonad.StackSet    as W
 import qualified Data.Map           as M
+import qualified Data.Maybe         as DM
 
 
 
 
 myTerminal           = "alacritty"
+
 myFocusFollowsMouse  :: Bool
 myFocusFollowsMouse  = True
+
 myBorderWidth        = 2
+
 myModMask            = mod4Mask
+
 myWorkspaces         = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
 myNormalBorderColor  = "#222222"
 myFocusedBorderColor = "#989898"
 
+toggleFullscreen :: X () 
+toggleFullscreen = do
+    sendMessage ToggleStruts
+    withFocused toggleBorder
 
 
 
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm                , xK_t     ), spawn $ XMonad.terminal conf)
+    [ ((modm                , xK_t     ), spawn $ XMonad.terminal conf                       )
+    , ((modm .|. shiftMask  , xK_t     ), spawn "konsole --hide-menubar"                     )
     , ((modm                , xK_p     ), spawn "LC_CTYPE=en_US.utf8 rofi -show run"         )
     , ((modm .|. shiftMask  , xK_b     ), spawn "LC_CTYPE=en_US.utf8 rofi-bluetooth"         )
     , ((modm .|. shiftMask  , xK_p     ), spawn "rofi-pdf"                                   )
     , ((modm                , xK_q     ), kill                                               )
     , ((modm                , xK_space ), sendMessage NextLayout                             )
-    , ((modm .|. controlMask, xK_t     ), sendMessage ToggleStruts                           )
+    , ((modm .|. controlMask, xK_t     ), toggleFullscreen                                   )
     , ((modm .|. shiftMask  , xK_space ), setLayout $ XMonad.layoutHook conf                 )
     , ((modm                , xK_n     ), refresh                                            )
     , ((modm                , xK_Tab   ), windows W.focusDown                                )
@@ -117,10 +128,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
 mySWNConfig :: SWNConfig
 mySWNConfig = def{
-    swn_font = "xft:Fira Code:bold:size=50"
-    , swn_fade = 0.25
+    swn_font      = "xft:Fira Code:bold:size=50"
+    , swn_fade    = 0.25
     , swn_bgcolor = "#000000"
-    , swn_color = "#ffffff"
+    , swn_color   = "#ffffff"
 }
 
 
@@ -166,6 +177,15 @@ myStartupHook = do
 
 
 
+myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..] 
+
+clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
+    where i = DM.fromJust $ M.lookup ws myWorkspaceIndices
+
+
+
+
+
 main = do
     xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"
     xmonad $ ewmh $ docks $ def{
@@ -185,14 +205,14 @@ main = do
         handleEventHook    = myEventHook         ,
         logHook            = dynamicLogWithPP $ xmobarPP {
             ppOutput          = hPutStrLn xmproc,
-            ppCurrent         = xmobarColor "#ccff00" "" . wrap "[" "]",
-            ppVisible         = xmobarColor "#ccff00" ""               ,
-            ppHidden          = xmobarColor "#ccff00" ""               ,
-            ppHiddenNoWindows = xmobarColor "#918db1" ""               ,
-            ppTitle           = xmobarColor "#ffffff" "" . shorten 50  ,
-            ppSep             =  "  "                                  ,
-            ppUrgent          = xmobarColor "#C45500" "" . wrap "!" "!",
-            ppExtras          = []                                     ,
+            ppCurrent         = xmobarColor "#ccff00" "" . wrap "[" "]" . clickable,
+            ppVisible         = xmobarColor "#ccff00" ""                . clickable,
+            ppHidden          = xmobarColor "#ccff00" ""                . clickable,
+            ppHiddenNoWindows = xmobarColor "#918db1" ""                . clickable,
+            ppTitle           = xmobarColor "#ffffff" "" . shorten 50              ,
+            ppSep             =  "  "                                              ,
+            ppUrgent          = xmobarColor "#C45500" "" . wrap "!" "!" . clickable,
+            ppExtras          = []                                                 ,
             ppOrder           = \(ws:l:t:ex) -> ws:[l]
         },
         startupHook        = myStartupHook
