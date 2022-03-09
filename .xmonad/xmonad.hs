@@ -40,8 +40,8 @@ myBorderWidth        = 2
 myModMask            = mod4Mask
 
 myWorkspaces         = ["MAIN","DEV","CONF","MEET","VMC","BG","SYS","VIRT","MISC"] 
-myNormalBorderColor  = "#222222"
-myFocusedBorderColor = "#989898"
+myNormalBorderColor  = "#000000"
+myFocusedBorderColor = "#888888"
 
 toggleFullscreen :: X () 
 toggleFullscreen = do
@@ -80,6 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask  , xK_g     ), sendMessage ToggleGaps                             )
     , ((modm                , xK_a     ), spawn "xmonad-keys-gui"                            )
     , ((modm .|. shiftMask  , xK_c     ), spawn "flameshot gui"                              )
+    , ((modm                , xK_c     ), spawn "XDG_CURRENT_DESKTOP=KDE cantata"            )
     , ((modm .|. shiftMask  , xK_a     ), spawn "killall flameshot"                          )
     , ((modm .|. controlMask, xK_plus  ), sendMessage MagnifyMore                            )
     , ((modm .|. controlMask, xK_minus ), sendMessage MagnifyLess                            )
@@ -140,15 +141,15 @@ mySWNConfig = def{
 myLayout =  magnifierOff 
          $  showWName' mySWNConfig  
          $  avoidStruts myDefaultLayout
-  where
-    myDefaultLayout = tiled 
-                  ||| Mirror tiled 
-                  ||| Full 
-                  ||| simplestFloat
-    tiled   = Tall nmaster delta ratio
-    nmaster = 1
-    ratio   = 1/2
-    delta   = 3/100
+         where
+            myDefaultLayout = tiled 
+                          ||| Mirror tiled 
+                          ||| Full 
+                          ||| simplestFloat
+            tiled   = Tall nmaster delta ratio
+            nmaster = 1
+            ratio   = 1/2
+            delta   = 3/100
 
 
 
@@ -169,7 +170,6 @@ myEventHook = swallowEventHook (className =? "Alacritty") (return True)
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
-    spawnOnce "dunst &"
     spawnOnce "~/.local/bin/wifi-connect &"
     spawnOnce "yakuake &"
 
@@ -205,10 +205,10 @@ main = do
         handleEventHook    = myEventHook         ,
         logHook            = dynamicLogWithPP $ xmobarPP {
             ppOutput          = hPutStrLn xmproc,
-            ppCurrent         = xmobarColor "#ccff00" "" . wrap "[" "]" . clickable,
-            ppVisible         = xmobarColor "#ccff00" ""                . clickable,
-            ppHidden          = xmobarColor "#ccff00" ""                . clickable,
-            ppHiddenNoWindows = xmobarColor "#918db1" ""                . clickable,
+            ppCurrent         = xmobarColor "#fabd2f" "" . wrap "[" "]" . clickable,
+            ppVisible         = xmobarColor "#fabd2f" ""                . clickable,
+            ppHidden          = xmobarColor "#fabd2f" ""                . clickable,
+            ppHiddenNoWindows = xmobarColor "#928374" ""                . clickable,
             ppTitle           = xmobarColor "#ffffff" "" . shorten 50              ,
             ppSep             =  "  "                                              ,
             ppUrgent          = xmobarColor "#C45500" "" . wrap "!" "!" . clickable,

@@ -6,10 +6,8 @@ set number
 set relativenumber
 
 set noswapfile
-set exrc
 
 set showcmd
-set nowrap
 set autoindent
 set smartindent
 set tabstop=4

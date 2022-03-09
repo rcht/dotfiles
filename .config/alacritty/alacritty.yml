@@ -214,9 +214,9 @@ schemes:
       cyan:    '#00fefc'
       white:   '#ffffff'
 
-colors: *neon-max
+colors: *gruvbox
 
-window.opacity: 1.0
+window.opacity: 1
 
 cursor:
   style: Block

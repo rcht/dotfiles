@@ -6,7 +6,7 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 export ZSH="/home/rachit/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="af-magic"
 
 plugins=(you-should-use git zsh-syntax-highlighting zsh-autosuggestions)
 
@@ -83,7 +83,8 @@ ex ()
   fi
 }
 
-makescript()
+
+mkscr()
 {
     printf "#!/usr/bin/env bash" > $1
     chmod +x $1
@@ -96,5 +97,3 @@ expr $(cat ~/lognumber) + 1 > ~/lognumber
 echo -e "$(cat ~/lognumber) logins so far\n"
 
 cal
-
-printf "\nPadhle Bsdk\n"
