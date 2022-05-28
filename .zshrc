@@ -1,20 +1,8 @@
-# ---------------
-# OH MY ZSH STUFF
-# ---------------
-
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-export ZSH="/home/rachit/.oh-my-zsh"
-
-ZSH_THEME="af-magic"
-
-plugins=(you-should-use git zsh-syntax-highlighting zsh-autosuggestions)
-
-source $ZSH/oh-my-zsh.sh
-
 # ---------------------------
 # SHELL ENVIRONMENT VARIABLES
 # ---------------------------
+
+PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} $ %f%b"
 
 export EDITOR=nvim
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -54,6 +42,10 @@ alias linedo="xargs -d '\n' -I {}"
 alias clock='tty-clock'
 alias disconnect="nmcli con down id \"\$(nmcli d | tail -n3 | head -n1 | awk '{for (i = 4; i <= NF; i++) print \$i}')\""
 alias wifi-name="nmcli d"
+alias l="ls"
+alias ll="ls -la"
+alias la="ls -la"
+alias k="killall wireplumber"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
@@ -97,3 +89,20 @@ expr $(cat ~/lognumber) + 1 > ~/lognumber
 echo -e "$(cat ~/lognumber) logins so far\n"
 
 cal
+
+# -------------------
+# SOURCING PLUGINS :(
+# -------------------
+
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+autoload -Uz compinit && compinit
+
+setopt auto_cd
+
+source ~/zplugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source ~/zplugins/zsh-vi-mode/zsh-vi-mode.zsh
+
+ZVM_CURSOR_STYLE_ENABLED=false
+
+source ~/zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -1,5 +1,5 @@
 Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
-       , bgColor = "black"
+       , bgColor = "#000000"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = True

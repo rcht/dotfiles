@@ -36,7 +36,7 @@ font:
     family: Roboto Mono
     style: Bold Italic
 
-  size: 7.5
+  size: 10
 
   offset:
     x: 0
@@ -47,9 +47,9 @@ draw_bold_text_with_bright_colors: true
 schemes:
   gruvbox: &gruvbox
     primary:
-      background: '0x000000'
+      # background: '0x000000'
       # background: '0x282828'
-      # soft contrast: background = '0x32302f'
+      soft contrast: background = '0x32302f'
       foreground: '0xebdbb2'
 
     # Normal colors
