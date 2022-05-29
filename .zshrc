@@ -99,10 +99,4 @@ autoload -Uz compinit && compinit
 
 setopt auto_cd
 
-source ~/zplugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-source ~/zplugins/zsh-vi-mode/zsh-vi-mode.zsh
-
-ZVM_CURSOR_STYLE_ENABLED=false
-
 source ~/zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

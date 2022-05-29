@@ -10,9 +10,9 @@ Mostly personal backup, nothing too interesting here.
 
 #### Plugins
 
-- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/)
-- [zsh-vi-mode](https://github.com/jeffreytse/zsh-vi-mode)
+
+(for each plugin, clone its git repo to `~/zplugins`)
 
 #### Replaced coreutils
 
