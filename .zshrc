@@ -2,7 +2,7 @@
 # SHELL ENVIRONMENT VARIABLES
 # ---------------------------
 
-PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} $ %f%b"
+PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} (0_o)--> %f%b"
 
 export EDITOR=nvim
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -22,6 +22,7 @@ alias fucking='sudo'
 alias cls='clear'
 alias ytdl='yt-dlp'
 alias audl='yt-dlp -x --audio-format mp3'
+alias pkhex='WINEARCH=win32 WINEPREFIX=~/wine wine ~/wine/exe/PkHaX.exe'
 alias vimrc='nvim ~/.config/nvim/init.vim'
 alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
 alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
@@ -46,6 +47,8 @@ alias l="ls"
 alias ll="ls -la"
 alias la="ls -la"
 alias k="killall wireplumber"
+alias z="zathura"
+alias nb="newsboat"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
@@ -90,13 +93,16 @@ echo -e "$(cat ~/lognumber) logins so far\n"
 
 cal
 
-# -------------------
-# SOURCING PLUGINS :(
-# -------------------
+# ----------------------------------------
+# SOURCING PLUGINS AND SHELL CONFIGURATION
+# ----------------------------------------
+
+bindkey -v
 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit && compinit
 
 setopt auto_cd
+setopt interactive_comments
 
 source ~/zplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

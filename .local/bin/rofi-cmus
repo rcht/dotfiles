@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# control cmus with rofi/dmenu
+# adding this comment just in cases someone googles something
+# like "cmus-remote rofi"
+
+# just an example use-case
+
+cmd=`printf "player-pause\nplayer-next\nplayer-prev\nvol 25%%\nvol 50%%\nvol 100%%" | rofi -dmenu -i -matching fuzzy`
+
+[[ -z "$cmd" ]] || cmus-remote -C "$cmd"
