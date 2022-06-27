@@ -66,7 +66,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_Tab   ), windows W.focusDown                                       )
     , ((modm                , xK_j     ), windows W.focusDown                                       )
     , ((modm                , xK_k     ), windows W.focusUp                                         )
-    , ((modm                , xK_m     ), windows W.focusMaster                                     )
+    , ((modm                , xK_m     ), spawn "rofi-cmus"                                         )
     , ((modm .|. shiftMask  , xK_m     ), spawn $ myTerminal ++ " -e cmus"                          )
     , ((modm                , xK_Return), windows W.swapMaster                                      )
     , ((modm .|. shiftMask  , xK_j     ), windows W.swapDown                                        )
