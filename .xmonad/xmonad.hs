@@ -191,7 +191,7 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 
 
 main = do
-    xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.xmonad/xmobar.hs"
+    xmproc <- spawnPipe "LC_CTYPE=en_US.utf8 xmobar -x 0 $HOME/.config/xmobar/xmobar.hs "
     xmonad $ ewmh $ docks $ def{
         terminal           = myTerminal          ,
         focusFollowsMouse  = myFocusFollowsMouse ,

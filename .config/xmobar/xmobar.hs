@@ -14,5 +14,5 @@ Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/rachit/.xmonad/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#fb4934> %uptime% </fc><fc=#fe8019> %wlp0s20f3wi% </fc><fc=#fabd2f> %cpu% </fc><fc=#b8bb26> %battery% </fc><fc=#83a598> %date% </fc>"
+       , template = "<icon=/home/rachit/.config/xmobar/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#fb4934> %uptime% </fc><fc=#fe8019> %wlp0s20f3wi% </fc><fc=#fabd2f> %cpu% </fc><fc=#b8bb26> %battery% </fc><fc=#83a598> %date% </fc>"
        }
