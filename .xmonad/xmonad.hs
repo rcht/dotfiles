@@ -49,7 +49,8 @@ toggleFullscreen = do
     withFocused toggleBorder
     sendMessage ToggleGaps
 
-
+-- command to launch galaxy buds client, I didn't want to mess up the table structure with the long environment variable 
+gbudsClientCmd = "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 GalaxyBudsClient_Linux_64bit_Portable.bin"
 
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -89,7 +90,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_m     ), sendMessage Toggle                                        )
     , ((modm .|. shiftMask  , xK_Right ), shiftToNext                                               )
     , ((modm .|. shiftMask  , xK_Left  ), shiftToPrev                                               )
-    , ((modm                , xK_g     ), spawn "GalaxyBudsClient_Linux_64bit_Portable.bin &"       )
+    , ((modm                , xK_g     ), spawn gbudsClientCmd                                      )
     , ((0                   , xK_F2    ), spawn "amixer -q sset Master 3%-"                         )
     , ((0                   , xK_F3    ), spawn "amixer -q sset Master 3%+"                         )
     , ((0                   , xK_F1    ), spawn "amixer -D pulse set Master 1+ toggle"              )

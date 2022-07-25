@@ -97,6 +97,12 @@ cal
 # SOURCING PLUGINS AND SHELL CONFIGURATION
 # ----------------------------------------
 
+# why is there no history logging by default lol
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
 bindkey -v
 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
