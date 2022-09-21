@@ -5,7 +5,9 @@
 PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} (0_o)--> %f%b"
 
 export EDITOR=nvim
+export PATH="/home/rachit/.local/bin:/home/rachit/.cargo/bin:$PATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+source "$HOME/.cargo/env"
 
 # -------
 # ALIASES
@@ -49,6 +51,7 @@ alias la="ls -la"
 alias k="killall wireplumber"
 alias z="zathura"
 alias nb="newsboat"
+alias zen="~/.local/bin/zentile_linux_amd64 &"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
@@ -84,6 +87,29 @@ mkscr()
     printf "#!/usr/bin/env bash" > $1
     chmod +x $1
     $EDITOR $1
+}
+
+# stopwatch and timer (found on superuser)
+
+countdown() {
+    start="$(( $(date +%s) + $1))"
+    while [ "$start" -ge $(date +%s) ]; do
+        ## Is this more than 24h away?
+        days="$(($(($(( $start - $(date +%s) )) * 1 )) / 86400))"
+        time="$(( $start - `date +%s` ))"
+        printf '%s day(s) and %s\r' "$days" "$(date -u -d "@$time" +%H:%M:%S)"
+        sleep 0.1
+    done
+}
+
+stopwatch() {
+    start=$(date +%s)
+    while true; do
+        days="$(($(( $(date +%s) - $start )) / 86400))"
+        time="$(( $(date +%s) - $start ))"
+        printf '%s day(s) and %s\r' "$days" "$(date -u -d "@$time" +%H:%M:%S)"
+        sleep 0.1
+    done
 }
 
 # the file lognumber stores the number of times I've logged in to bash/zsh, and everytime this bashrc is run, that number is updated.

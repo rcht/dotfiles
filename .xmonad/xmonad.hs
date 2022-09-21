@@ -55,10 +55,9 @@ gbudsClientCmd = "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 GalaxyBudsClient_Linux
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm                , xK_t     ), spawn $ XMonad.terminal conf                              )
-    , ((modm .|. shiftMask  , xK_t     ), spawn "konsole --hide-menubar"                            )
     , ((modm                , xK_p     ), spawn "LC_CTYPE=en_US.utf8 rofi -show run"                )
     , ((modm .|. shiftMask  , xK_b     ), spawn "LC_CTYPE=en_US.utf8 rofi-bluetooth"                )
-    , ((modm .|. shiftMask  , xK_p     ), spawn "rofi-pdf"                                          )
+    , ((modm .|. shiftMask  , xK_p     ), spawn "~/.local/bin/rofi-pdf"                             )
     , ((modm                , xK_q     ), kill                                                      )
     , ((modm                , xK_space ), sendMessage NextLayout                                    )
     , ((modm .|. controlMask, xK_t     ), toggleFullscreen                                          )
@@ -67,7 +66,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_Tab   ), windows W.focusDown                                       )
     , ((modm                , xK_j     ), windows W.focusDown                                       )
     , ((modm                , xK_k     ), windows W.focusUp                                         )
-    , ((modm                , xK_m     ), spawn "rofi-cmus"                                         )
+    , ((modm                , xK_m     ), spawn "~/.local/bin/rofi-cmus"                            )
     , ((modm .|. shiftMask  , xK_m     ), spawn $ myTerminal ++ " -e cmus"                          )
     , ((modm                , xK_Return), windows W.swapMaster                                      )
     , ((modm .|. shiftMask  , xK_j     ), windows W.swapDown                                        )
@@ -81,7 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask  , xK_q     ), io exitSuccess                                            )
     , ((modm .|. shiftMask  , xK_h     ), spawn "xmonad --recompile; xmonad --restart"              )
     , ((modm .|. shiftMask  , xK_g     ), sendMessage ToggleGaps                                    )
-    , ((modm                , xK_a     ), spawn "xmonad-keys-gui"                                   )
+    , ((modm                , xK_a     ), spawn "alacritty -e ~/.local/bin/xmonad-keys"             )
     , ((modm .|. shiftMask  , xK_c     ), spawn "flameshot gui"                                     )
     , ((modm                , xK_c     ), spawn "rofi -show calc -modi calc -no-show-match -no-sort")
     , ((modm .|. shiftMask  , xK_a     ), spawn "killall flameshot"                                 )
@@ -90,7 +89,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_m     ), sendMessage Toggle                                        )
     , ((modm .|. shiftMask  , xK_Right ), shiftToNext                                               )
     , ((modm .|. shiftMask  , xK_Left  ), shiftToPrev                                               )
-    , ((modm                , xK_g     ), spawn gbudsClientCmd                                      )
     , ((0                   , xK_F2    ), spawn "amixer -q sset Master 3%-"                         )
     , ((0                   , xK_F3    ), spawn "amixer -q sset Master 3%+"                         )
     , ((0                   , xK_F1    ), spawn "amixer -D pulse set Master 1+ toggle"              )
@@ -175,8 +173,8 @@ myEventHook = swallowEventHook (className =? "Alacritty") (return True)
 myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
-    spawnOnce "~/.local/bin/wifi-connect &"
-    spawnOnce "yakuake &"
+    spawn "~/.local/bin/wifi-connect &"
+
 
 
 

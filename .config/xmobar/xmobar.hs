@@ -5,7 +5,7 @@ Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
        , lowerOnStart = True
        , commands = [ Run Cpu [] 10
                     , Run Uptime ["-t", "Up: <hours>h <minutes>m"] 10
-                    , Run Wireless "wlp0s20f3" ["-t","Wlan: <essid>"] 10
+                    , Run DynNetwork ["-t","Wlan: <essid>"] 10
                     , Run Memory [ "-t", "Mem: <usedratio>%" ] 10
                     , Run Battery ["-t", "Batt: <left>% <timeleft>"] 10
                     , Run UnsafeStdinReader

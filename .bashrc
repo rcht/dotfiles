@@ -1,208 +1,88 @@
-# --  
-# SECTION - PRECONFIG
-# --
+#
+# ~/.bashrc
+#
 
+# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-colors() {
-	local fgc bgc vals seq0
+[[ -f ~/.welcome_screen ]] && . ~/.welcome_screen
 
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
+_set_liveuser_PS1() {
+    PS1='[\u@\h \W]\$ '
+    if [ "$(whoami)" = "liveuser" ] ; then
+        local iso_version="$(grep ^VERSION= /usr/lib/endeavouros-release 2>/dev/null | cut -d '=' -f 2)"
+        if [ -n "$iso_version" ] ; then
+            local prefix="eos-"
+            local iso_info="$prefix$iso_version"
+            PS1="[\u@$iso_info \W]\$ "
+        fi
+    fi
+}
+_set_liveuser_PS1
+unset -f _set_liveuser_PS1
 
-	# foreground colors
-	for fgc in {30..37}; do
-		# background colors
-		for bgc in {40..47}; do
-			fgc=${fgc#37} # white
-			bgc=${bgc#40} # black
-
-			vals="${fgc:+$fgc;}${bgc}"
-			vals=${vals%%;}
-
-			seq0="${vals:+\e[${vals}m}"
-			printf "  %-9s" "${seq0:-(default)}"
-			printf " ${seq0}TEXT\e[m"
-			printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-		done
-		echo; echo
-	done
+ShowInstallerIsoInfo() {
+    local file=/usr/lib/endeavouros-release
+    if [ -r $file ] ; then
+        cat $file
+    else
+        echo "Sorry, installer ISO info is not available." >&2
+    fi
 }
 
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-# Change the window title of X terminals
-case ${TERM} in
-	xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-		;;
-	screen*)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
-esac
+alias ls='ls --color=auto'
+alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 
-use_color=true
+[[ "$(whoami)" = "root" ]] && return
 
-# Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
-match_lhs=""
-[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
-[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs}    ]] \
-	&& type -P dircolors >/dev/null \
-	&& match_lhs=$(dircolors --print-database)
-[[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
+[[ -z "$FUNCNEST" ]] && export FUNCNEST=100          # limits recursive functions, see 'man bash'
 
-if ${use_color} ; then
-	# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-	if type -P dircolors >/dev/null ; then
-		if [[ -f ~/.dir_colors ]] ; then
-			eval $(dircolors -b ~/.dir_colors)
-		elif [[ -f /etc/DIR_COLORS ]] ; then
-			eval $(dircolors -b /etc/DIR_COLORS)
-		fi
-	fi
+## Use the up and down arrow keys for finding a command in history
+## (you can write some initial letters of the command first).
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
 
-	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-	fi
+################################################################################
+## Some generally useful functions.
+## Consider uncommenting aliases below to start using these functions.
+##
+## October 2021: removed many obsolete functions. If you still need them, please look at
+## https://github.com/EndeavourOS-archive/EndeavourOS-archiso/raw/master/airootfs/etc/skel/.bashrc
 
-	alias ls='ls --color=auto'
-	alias grep='grep --colour=auto'
-	alias egrep='egrep --colour=auto'
-	alias fgrep='fgrep --colour=auto'
-else
-	if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		PS1='\u@\h \W \$ '
-	else
-		PS1='\u@\h \w \$ '
-	fi
-fi
+_open_files_for_editing() {
+    # Open any given document file(s) for editing (or just viewing).
+    # Note1:
+    #    - Do not use for executable files!
+    # Note2:
+    #    - Uses 'mime' bindings, so you may need to use
+    #      e.g. a file manager to make proper file bindings.
 
-unset use_color safe_term match_lhs sh
+    if [ -x /usr/bin/exo-open ] ; then
+        echo "exo-open $@" >&2
+        setsid exo-open "$@" >& /dev/null
+        return
+    fi
+    if [ -x /usr/bin/xdg-open ] ; then
+        for file in "$@" ; do
+            echo "xdg-open $file" >&2
+            setsid xdg-open "$file" >& /dev/null
+        done
+        return
+    fi
 
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias more=less
-
-xhost +local:root > /dev/null 2>&1
-
-# Bash won't get SIGWINCH if another process is in the foreground.
-# Enable checkwinsize so that bash will check the terminal size when
-# it regains control.  #65623
-# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
-shopt -s checkwinsize
-
-shopt -s expand_aliases
-
-
-shopt -s histappend
-
-# # ex - archive extractor
-# # usage: ex <file>
-ex ()
-{
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
-      *)           echo "'$1' cannot be extracted via ex()" ;;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+    echo "$FUNCNAME: package 'xdg-utils' or 'exo' is required." >&2
 }
-source /usr/share/nvm/init-nvm.sh
+
+#------------------------------------------------------------
+
+## Aliases for the functions above.
+## Uncomment an alias if you want to use it.
+##
+
+# alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
+# alias pacdiff=eos-pacdiff
+################################################################################
+
 . "$HOME/.cargo/env"
-
-# --
-# SECTION - ALIASES 
-# --
-
-alias fucking='sudo'
-# the only thing I miss from windows :p
-alias cls='clear'
-alias ytdl='youtube-dl'
-alias audl='youtube-dl -x --audio-format mp3'
-
-
-
-alias vimrc='nvim ~/.config/nvim/init.vim'
-alias bashrc='nvim ~/.bashrc && source ~/.bashrc'
-alias emurc="nvim ~/.config/alacritty/alacritty.yml"
-alias wmrc="nvim ~/.xmonad/xmonad.hs"
-
-
-
-alias cowsay='/usr/bin/cowsay'
-alias vim=nvim
-alias ls='exa --group-directories-first -a ' 
-
-
-alias screenshot="flameshot full -c -p ~/Pictures/screenshots/"
-alias speedtest='curl https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -'
-alias mskill='killall teams-for-linux; killall alacritty'
-
-
-
-alias gst='git status'
-alias gl='git log'
-alias gpo='git push origin'
-alias commit='git add .; git commit -m'
-
-
-# -- 
-# SECTION - STARTUP OUTPUT
-# --
-
-# the file lognumber stores the number of times I've logged in to bash, and everytime this bashrc is run, that number is updated. 
-# you might wanna create a file like that and have only a number in it if you wanna use my config, else remove the 10 lines below. 
-[ ! -e ~/lognumber ] && echo 0 > ~/lognumber
-# [ ! -e ~/TODO ] && touch ~/TODO
-
-expr $(cat ~/lognumber) + 1 > ~/lognumber
-echo -e "$(cat ~/lognumber) logins so far"
-
-
-# grep -q "[^[:space:]]" < ~/TODO && (echo -e "TODO"; cat ~/TODO)
-
-echo -e '\n\n'
-cal
-
-# --
-# SECTION - OPTIONS 
-# --
-
-set -o vi
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
-shopt -s autocd
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-
-# 
-# SECTION - PROMPT
-# 
-
-# [user dir]$ 
-# export PS1='\[\033[01;32m\][\u\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-
-eval "$(starship init bash)"

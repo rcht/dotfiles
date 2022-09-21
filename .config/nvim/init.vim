@@ -73,8 +73,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'SirVer/UltiSnips'
 Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
 Plug 'gruvbox-community/gruvbox'
