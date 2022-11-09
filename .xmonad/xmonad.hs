@@ -92,6 +92,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0                   , xK_F2    ), spawn "amixer -q sset Master 3%-"                         )
     , ((0                   , xK_F3    ), spawn "amixer -q sset Master 3%+"                         )
     , ((0                   , xK_F1    ), spawn "amixer -D pulse set Master 1+ toggle"              )
+    , ((0                   , xK_F9    ), spawn "xfce4-terminal --drop-down"                        )
     ]
     ++
     [((m .|. modm, k), windows $ f i)
@@ -159,6 +160,7 @@ myLayout =  magnifierOff
 
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
+    , className =? "Xfce4-terminal" --> doFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 

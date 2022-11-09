@@ -5,7 +5,7 @@ Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
        , lowerOnStart = True
        , commands = [ Run Cpu [] 10
                     , Run Uptime ["-t", "Up: <hours>h <minutes>m"] 10
-                    , Run DynNetwork ["-t","Wlan: <essid>"] 10
+                    , Run Wireless "wlan0" ["-t","Wlan: <essid>"] 10
                     , Run Memory [ "-t", "Mem: <usedratio>%" ] 10
                     , Run Battery ["-t", "Batt: <left>% <timeleft>"] 10
                     , Run UnsafeStdinReader
@@ -14,5 +14,5 @@ Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/rachit/.config/xmobar/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#fb4934> %uptime% </fc><fc=#fe8019> %wlp0s20f3wi% </fc><fc=#fabd2f> %cpu% </fc><fc=#b8bb26> %battery% </fc><fc=#83a598> %date% </fc>"
+       , template = "<icon=/home/rachit/.config/xmobar/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#fb4934> %uptime% </fc><fc=#fe8019> %wlan0wi% </fc><fc=#fabd2f> %cpu% </fc><fc=#b8bb26> %battery% </fc><fc=#83a598> %date% </fc>"
        }

@@ -84,11 +84,16 @@ ex ()
 
 mkscr()
 {
-    printf "#!/usr/bin/env bash" > $1
-    chmod +x $1
-    $EDITOR $1
+    printf "#!/usr/bin/env bash" > "$1"
+    chmod +x "$1"
+    $EDITOR "$1"
 }
-
+mkpy()
+{
+    printf "#!/usr/bin/env python" > "$1"
+    chmod +x "$1"
+    $EDITOR "$1"
+}
 # stopwatch and timer (found on superuser)
 
 countdown() {
