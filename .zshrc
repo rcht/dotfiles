@@ -12,7 +12,7 @@ source "$HOME/.cargo/env"
 # -------
 # ALIASES
 # -------
-
+alias py='python'
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
 alias egrep='egrep --colour=auto'
@@ -52,6 +52,7 @@ alias k="killall wireplumber"
 alias z="zathura"
 alias nb="newsboat"
 alias zen="~/.local/bin/zentile_linux_amd64 &"
+alias waclist="xsetwacom list devices"
 
 alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
@@ -91,6 +92,12 @@ mkscr()
 mkpy()
 {
     printf "#!/usr/bin/env python" > "$1"
+    chmod +x "$1"
+    $EDITOR "$1"
+}
+mkc()
+{
+    printf "#!/usr/bin/tcc -run" > "$1"
     chmod +x "$1"
     $EDITOR "$1"
 }
@@ -135,6 +142,7 @@ SAVEHIST=10000
 setopt appendhistory
 
 bindkey -v
+bindkey '^R' history-incremental-search-backward
 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 autoload -Uz compinit && compinit

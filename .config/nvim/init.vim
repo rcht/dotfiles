@@ -16,11 +16,13 @@ set expandtab
 set scrolloff=10
 set cursorline
 
+set title
 set nohlsearch
 set noerrorbells
 set termguicolors " colorizer requires this
 
 set signcolumn=yes
+set mouse=
 syntax on
 
 " ----------
