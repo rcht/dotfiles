@@ -1,4 +1,4 @@
-Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
+Config { font = "Roboto Mono, Bold, 11"
        , bgColor = "#000000"
        , fgColor = "grey"
        , position = Top
@@ -14,5 +14,5 @@ Config { font = "xft:Roboto Mono:size=11:bold:antialias=true"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "<icon=/home/rachit/.config/xmobar/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#fb4934> %uptime% </fc><fc=#fe8019> %wlan0wi% </fc><fc=#fabd2f> %cpu% </fc><fc=#b8bb26> %battery% </fc><fc=#83a598> %date% </fc>"
+       , template = "<icon=/home/rachit/.config/xmobar/haskell.xpm/>  %UnsafeStdinReader% }{ <fc=#7d4a83> %uptime% </fc><fc=#9e70a1> %wlan0wi% </fc><fc=#be97be> %cpu% </fc><fc=#dfbddc> %battery% </fc><fc=#ffe3f9> %date% </fc>"
        }

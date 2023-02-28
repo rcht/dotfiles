@@ -39,4 +39,5 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'ayu-theme/ayu-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'andweeb/presence.nvim'
 ```

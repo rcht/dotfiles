@@ -67,6 +67,8 @@ augroup END
 
 nnoremap <leader>mk :make<CR>
 
+" let g:presence_log_level="debug"
+
 " ----------------
 " vim-plug plugins
 " ----------------
@@ -83,6 +85,8 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'ayu-theme/ayu-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'norcalli/nvim-colorizer.lua'
+" gotta rizz em up
+Plug 'andweeb/presence.nvim'
 
 call plug#end()
 
