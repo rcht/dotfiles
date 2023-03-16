@@ -58,7 +58,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_p     ), spawn "LC_CTYPE=en_US.utf8 rofi -show run"                )
     , ((modm                , xK_s     ), spawn "~/.local/bin/rofi-books"                           )
     , ((modm .|. shiftMask  , xK_b     ), spawn "LC_CTYPE=en_US.utf8 rofi-bluetooth"                )
-    , ((modm .|. shiftMask  , xK_e     ), spawn "~/.local/bin/rofi-emoji"                           )
+    , ((modm .|. shiftMask  , xK_e     ), spawn "LC_CTYPE=en_US.utf8 rofi-emoji"                    )
     , ((modm .|. shiftMask  , xK_p     ), spawn "~/.local/bin/rofi-pdf"                             )
     , ((modm                , xK_q     ), kill                                                      )
     , ((modm                , xK_space ), sendMessage NextLayout                                    )
@@ -212,11 +212,11 @@ main = do
         handleEventHook    = myEventHook         ,
         logHook            = dynamicLogWithPP $ xmobarPP {
             ppOutput          = hPutStrLn xmproc,
-            ppCurrent         = xmobarColor "#7D4A83" "" . wrap "[" "]" . clickable,
-            ppVisible         = xmobarColor "#7D4A83" ""                . clickable,
-            ppHidden          = xmobarColor "#7D4A83" ""                . clickable,
-            ppHiddenNoWindows = xmobarColor "#DCB1F1" ""                . clickable,
-            ppTitle           = xmobarColor "#FFE3F9" "" . shorten 50              ,
+            ppCurrent         = xmobarColor "#fabd2f" "" . wrap "[" "]" . clickable,
+            ppVisible         = xmobarColor "#fabd2f" ""                . clickable,
+            ppHidden          = xmobarColor "#fabd2f" ""                . clickable,
+            ppHiddenNoWindows = xmobarColor "#928374" ""                . clickable,
+            ppTitle           = xmobarColor "#ffffff" "" . shorten 50              ,
             ppSep             =  "  "                                              ,
             ppUrgent          = xmobarColor "#7D4A83" "" . wrap "!" "!" . clickable,
             ppExtras          = []                                                 ,
