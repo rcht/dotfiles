@@ -31,13 +31,29 @@ Mostly personal backup, nothing too interesting here.
 ```
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'SirVer/UltiSnips'
 Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
-Plug 'gruvbox-community/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'romgrk/barbar.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'andweeb/presence.nvim'
 ```
+
+#### Programs and Libraries
+
+- Python `neovim` module (for UltiSnips)
+- `clangd`
+- `texlab`
+
+### Fonts
+
+- Fira Code
+- Hack
+- SpaceMono Nerd Font Mono
+- Roboto Mono

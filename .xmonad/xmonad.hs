@@ -68,7 +68,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm                , xK_Tab   ), windows W.focusDown                                       )
     , ((modm                , xK_j     ), windows W.focusDown                                       )
     , ((modm                , xK_k     ), windows W.focusUp                                         )
-    , ((modm                , xK_m     ), spawn "~/.local/bin/rofi-cmus"                            )
+    , ((modm                , xK_m     ), spawn "~/.local/bin/rofi-playerctl"                       )
     , ((modm .|. shiftMask  , xK_m     ), spawn $ myTerminal ++ " -e cmus"                          )
     , ((modm                , xK_Return), windows W.swapMaster                                      )
     , ((modm .|. shiftMask  , xK_j     ), windows W.swapDown                                        )
@@ -125,6 +125,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
     , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
                                        >> windows W.shiftMaster))
+    , ((   0,       9), (\w -> focus w >> spawn 
+                                         "playerctl play-pause"))
     -- , ((0, button1), mouseGesture gestures)
     ]
 
@@ -175,6 +177,7 @@ myEventHook = swallowEventHook (className =? "Alacritty") (return True)
 
 
 myStartupHook = do
+    -- spawnOnce "xrandr -s 1920x1200 &"
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
     spawn "~/.local/bin/wifi-connect &"

@@ -2,6 +2,7 @@
 " Settings
 " --------
 
+
 set number
 set relativenumber
 
@@ -33,7 +34,7 @@ let mapleader = " "
 set timeoutlen=2000
 
 " I use these so that it's easy to jump into normal mode, I don't type j and k
-"together very often. If I have to do it then I'm fucked lol
+" together very often. If I have to do it then I'm fucked lol
 imap jk <Esc>
 imap kj <Esc>
 
@@ -50,6 +51,7 @@ function! CommentToggle()
     execute ':silent! s/^\( *\)' . escape(b:comment_leader,'\/') . ' \?' . escape(b:comment_leader,'\/') . ' \?/\1/'
 endfunction
 
+nnoremap <leader>b :Files .<CR>
 nnoremap <leader>c :call CommentToggle()<CR>j
 nnoremap <leader>fb :ClangFormat<CR>
 " yank buffer  
@@ -64,6 +66,7 @@ augroup file_template
     autocmd BufNewFile *.tex 0r ~/.config/nvim/templates/new.tex
 augroup END
 
+" 
 
 nnoremap <leader>mk :make<CR>
 
@@ -81,8 +84,15 @@ Plug 'SirVer/UltiSnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ThePrimeagen/vim-be-good'
 Plug 'rhysd/vim-clang-format'
-Plug 'gruvbox-community/gruvbox'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Plug 'gruvbox-community/gruvbox'
+" Plug 'talha-akram/noctis.nvim'
 Plug 'ayu-theme/ayu-vim'
+Plug 'romgrk/barbar.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
+" Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 " gotta rizz em up
@@ -98,16 +108,24 @@ let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-colorscheme gruvbox
-highlight Normal guibg=none
-highlight clear SignColumn
+colorscheme ayu 
+" highlight Normal guibg=none
+" highlight clear SignColumn
 
 lua require'colorizer'.setup()
 
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'molokai',
       \ }
 
+" Move to previous/next
+nnoremap <leader>nj <Cmd>BufferPrevious<CR>
+nnoremap <leader>nk <Cmd>BufferNext<CR>
+
+" Close buffer
+nnoremap <leader>wq <Cmd>BufferClose<CR>
+" Restore buffer
+nnoremap <leader>u <Cmd>BufferRestore<CR>
 
 " ---------
 " LSP setup 
@@ -183,4 +201,15 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+   vim.api.nvim_set_hl(0, group, {})
+end
+
+-- vim.api.nvim_set_hl(0, 'Identifier', { bold=true })
+vim.api.nvim_set_hl(0, 'Comment', { italic=true, fg="Grey" })
+vim.api.nvim_set_hl(0, 'String', { italic=true, fg="#B8CC52" })
+-- vim.api.nvim_set_hl(0, 'Constant', { fg="Red" })
+
 EOF
+

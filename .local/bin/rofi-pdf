@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+choice=$(fd -e pdf -e djvu --base-directory ~ | rofi -dmenu -i -matching fuzzy) 
+
+[[ -z "$choice" ]] || zathura ~/"$choice"

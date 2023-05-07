@@ -22,19 +22,19 @@ scrolling:
 
 font:
   normal:
-    family: Roboto Mono
+    family: Fira Code
     style: Regular
 
   bold:
-    family: Roboto Mono
+    family: Roboto Mono 
     style: Bold
 
   italic:
-    family: Roboto Mono
+    family: SpaceMono Nerd Font Mono
     style: Italic
 
   bold_italic:
-    family: Roboto Mono
+    family: SpaceMono Nerd Font Mono
     style: Bold Italic
 
   size: 10
@@ -102,7 +102,6 @@ schemes:
       magenta: '#ffee99'
       cyan:    '#95e6cb'
       white:   '#ffffff'
-
   doom-one: &doom-one
     primary:
       background: '#282c34'
@@ -149,7 +148,7 @@ schemes:
       focused_match:
         foreground: '#44475a'
         background: '#ffb86c'
-      bar:
+      colors.footer_bar:
         background: '#282a36'
         foreground: '#f8f8f2'
     line_indicator:
@@ -185,6 +184,89 @@ schemes:
       magenta: '#ff46b0'
       cyan:    '#59dffc'
       white:   '#e6e6d1'
+  wombat: &wombat
+    # Default colors
+    primary:
+      background: '0x1f1f1f'
+      foreground: '0xe5e1d8'
+
+    # Normal colors
+    normal:
+      black:   '0x000000'
+      red:     '0xf7786d'
+      green:   '0xbde97c'
+      yellow:  '0xefdfac'
+      blue:    '0x6ebaf8'
+      magenta: '0xef88ff'
+      cyan:    '0x90fdf8'
+      white:   '0xe5e1d8'
+
+    # Bright colors
+    bright:
+      black:   '0xb4b4b4'
+      red:     '0xf99f92'
+      green:   '0xe3f7a1'
+      yellow:  '0xf2e9bf'
+      blue:    '0xb3d2ff'
+      magenta: '0xe5bdff'
+      cyan:    '0xc2fefa'
+      white:   '0xffffff'
+
+  monokai-pro: &monokai-pro
+  # Default colors
+    primary:
+      background: '0x2D2A2E'
+      foreground: '0xfff1f3'
+
+    # Normal colors
+    normal:
+      black:   '0x2c2525'
+      red:     '0xfd6883'
+      green:   '0xadda78'
+      yellow:  '0xf9cc6c'
+      blue:    '0xf38d70'
+      magenta: '0xa8a9eb'
+      cyan:    '0x85dacc'
+      white:   '0xfff1f3'
+
+    # Bright colors
+    bright:
+      black:   '0x72696a'
+      red:     '0xfd6883'
+      green:   '0xadda78'
+      yellow:  '0xf9cc6c'
+      blue:    '0xf38d70'
+      magenta: '0xa8a9eb'
+      cyan:    '0x85dacc'
+      white:   '0xfff1f3'
+
+  nord: &nord
+  # Default colors
+    primary:
+      background: '0x2E3440'
+      foreground: '0xD8DEE9'
+
+    # Normal colors
+    normal:
+      black:   '0x3B4252'
+      red:     '0xBF616A'
+      green:   '0xA3BE8C'
+      yellow:  '0xEBCB8B'
+      blue:    '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan:    '0x88C0D0'
+      white:   '0xE5E9F0'
+
+    # Bright colors
+    bright:
+      black:   '0x4C566A'
+      red:     '0xBF616A'
+      green:   '0xA3BE8C'
+      yellow:  '0xEBCB8B'
+      blue:    '0x81A1C1'
+      magenta: '0xB48EAD'
+      cyan:    '0x8FBCBB'
+      white:   '0xECEFF4'
 
   neon-max: &neon-max # an experimental high contrast colorscheme that I'm testing. It's terrible lol
     primary:
@@ -215,7 +297,7 @@ schemes:
       cyan:    '#00fefc'
       white:   '#ffffff'
 
-colors: *gruvbox
+colors: *nord
 
 window.opacity: 0.6
 

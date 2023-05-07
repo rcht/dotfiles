@@ -7,11 +7,11 @@ PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} (0_o)--> %f%b"
 export EDITOR=nvim
 export PATH="/home/rachit/.local/bin:/home/rachit/.cargo/bin:$PATH"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-source "$HOME/.cargo/env"
 
 # -------
 # ALIASES
 # -------
+alias vim=nvim
 alias py='python'
 alias ls='ls --color=auto'
 alias grep='grep --colour=auto'
@@ -31,7 +31,7 @@ alias zshrc='nvim ~/.zshrc && source ~/.zshrc'
 alias emurc="nvim ~/.config/alacritty/alacritty.yml"
 alias wmrc="nvim ~/.xmonad/xmonad.hs"
 alias cowsay='/usr/bin/cowsay'
-alias vim=nvim
+#alias vim=nvim
 alias vi="/usr/bin/vim"
 alias ls='exa --group-directories-first -a ' 
 alias screenshot="flameshot full -c -p ~/Pictures/screenshots/"

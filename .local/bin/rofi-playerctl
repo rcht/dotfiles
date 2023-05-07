@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+choice=$(printf "play-pause\nnext\nprevious\nstop\n" | rofi -dmenu -i -matching fuzzy) 
+
+[[ -z "$choice" ]] || playerctl "$choice"
