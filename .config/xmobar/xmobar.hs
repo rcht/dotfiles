@@ -5,7 +5,7 @@ Config { font = "Roboto Mono, Bold, 15"
        , lowerOnStart = True
        , commands = [ Run Cpu [] 10
                     , Run Uptime ["-t", "Up: <hours>h <minutes>m"] 10
-                    , Run DynNetwork ["--", "--devices", "enp3s0f3u2,enp3s0f4u1,enp3s0f3u2"] 10
+                    , Run DynNetwork ["--", "--devices", "enp3s0f3u2,enp3s0f4u1,enp3s0f3u2,enp3s0f3u4"] 10
                     , Run Memory [ "-t", "Mem: <usedratio>%" ] 10
                     , Run Battery ["-t", "Batt: <left>% <timeleft>"] 10
                     , Run UnsafeStdinReader

@@ -30,18 +30,18 @@ import qualified Data.Maybe         as DM
 
 
 
-myTerminal           = "alacritty"
+myTerminal           = "st"
 
 myFocusFollowsMouse  :: Bool
 myFocusFollowsMouse  = True
 
-myBorderWidth        = 2
+myBorderWidth        = 8 
 
 myModMask            = mod4Mask
 
 myWorkspaces         = ["Main","Dev","Conf","IIIT","Mail","Bg","Sys","Virt","Misc"] 
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#888888"
+myFocusedBorderColor = "#ff10f0"
 
 toggleFullscreen :: X () 
 toggleFullscreen = do
@@ -91,9 +91,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. controlMask, xK_m     ), sendMessage Toggle                                        )
     , ((modm .|. shiftMask  , xK_Right ), shiftToNext                                               )
     , ((modm .|. shiftMask  , xK_Left  ), shiftToPrev                                               )
-    , ((0                   , xK_F2    ), spawn "amixer -q sset Master 3%-"                         )
-    , ((0                   , xK_F3    ), spawn "amixer -q sset Master 3%+"                         )
-    , ((0                   , xK_F1    ), spawn "amixer -D pulse set Master 1+ toggle"              )
     , ((0                   , xK_F9    ), spawn "xfce4-terminal --drop-down"                        )
     ]
     ++
@@ -181,6 +178,7 @@ myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
     spawn "~/.local/bin/wifi-connect &"
+    spawn "xset s off -dpms"
 
 
 

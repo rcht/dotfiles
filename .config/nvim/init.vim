@@ -44,6 +44,7 @@ augroup comment_chars
     autocmd Filetype c,cpp,rust,javascript let b:comment_leader = '//'
     autocmd Filetype vim let b:comment_leader = '"'
     autocmd Filetype haskell let b:comment_leader = '--'
+    autocmd Filetype tex let b:comment_leader = '%'
 augroup END
 
 function! CommentToggle()
@@ -96,7 +97,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 " gotta rizz em up
-Plug 'andweeb/presence.nvim'
+" Plug 'andweeb/presence.nvim'
 
 call plug#end()
 

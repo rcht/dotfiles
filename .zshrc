@@ -6,7 +6,7 @@ PROMPT="%(?..%F{red}[%?] )%F{cyan}%d%f%B%F{blue} (0_o)--> %f%b"
 
 export EDITOR=nvim
 export PATH="/home/rachit/.local/bin:/home/rachit/.cargo/bin:$PATH"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANPAGER='nvim +Man!'
 
 # -------
 # ALIASES
@@ -48,13 +48,16 @@ alias wifi-name="nmcli d"
 alias l="ls"
 alias ll="ls -la"
 alias la="ls -la"
-alias k="killall wireplumber"
 alias z="zathura"
 alias nb="newsboat"
 alias zen="~/.local/bin/zentile_linux_amd64 &"
 alias waclist="xsetwacom list devices"
 
-alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
+alias ihatewifi="nmcli -f in-use,ssid,bssid,freq,signal,bars dev wifi" 
+
+alias ix="curl -F 'f:1=<-' ix.io"
+
+# alias gitdf="/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME"
 
 # ----------------------
 # FUNCTIONS AND COMMANDS
@@ -127,7 +130,7 @@ stopwatch() {
 # the file lognumber stores the number of times I've logged in to bash/zsh, and everytime this bashrc is run, that number is updated.
 [ ! -e ~/lognumber ] && echo 0 > ~/lognumber
 expr $(cat ~/lognumber) + 1 > ~/lognumber
-echo -e "$(cat ~/lognumber) logins so far\n"
+echo -e "$(cat ~/lognumber) terminals so far\n"
 
 cal
 
