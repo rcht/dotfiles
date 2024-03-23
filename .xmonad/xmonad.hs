@@ -4,6 +4,7 @@ import System.IO (hPutStrLn)
 import XMonad
 
 import XMonad.Actions.CycleWS
+import XMonad.Actions.SpawnOn
 import XMonad.Actions.NoBorders
 
 import XMonad.Hooks.DynamicLog
@@ -30,18 +31,18 @@ import qualified Data.Maybe         as DM
 
 
 
-myTerminal           = "st"
+myTerminal           = "alacritty"
 
 myFocusFollowsMouse  :: Bool
 myFocusFollowsMouse  = True
 
-myBorderWidth        = 8 
+myBorderWidth        = 4 
 
 myModMask            = mod4Mask
 
-myWorkspaces         = ["Main","Dev","Conf","IIIT","Mail","Bg","Sys","Virt","Misc"] 
+myWorkspaces         = ["Main","CP","Study","Dev","Conf","BG","Sys","Virt","Misc"] 
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#ff10f0"
+myFocusedBorderColor = "#ff0000"
 
 toggleFullscreen :: X () 
 toggleFullscreen = do
@@ -179,7 +180,8 @@ myStartupHook = do
     spawnOnce "picom &"
     spawn "~/.local/bin/wifi-connect &"
     spawn "xset s off -dpms"
-
+    spawnOn "Study" "firefox --new-window \"https://mail.google.com/mail/u/2/#inbox\""
+    spawnOn "Main" "cat ~/rcht_todos | yad --text-info"
 
 
 

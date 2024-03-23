@@ -11,6 +11,7 @@ export MANPAGER='nvim +Man!'
 # -------
 # ALIASES
 # -------
+alias pyenv="source ~/.local/bin/venv"
 alias vim=nvim
 alias py='python'
 alias ls='ls --color=auto'
@@ -131,6 +132,13 @@ stopwatch() {
 [ ! -e ~/lognumber ] && echo 0 > ~/lognumber
 expr $(cat ~/lognumber) + 1 > ~/lognumber
 echo -e "$(cat ~/lognumber) terminals so far\n"
+
+tput setaf 1
+tput bold
+[ ! -e ~/rcht_todos ] && echo "fill out ~/rcht_todos!" > ~/rcht_todos
+cat ~/rcht_todos
+tput sgr0
+echo 
 
 cal
 

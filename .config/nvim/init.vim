@@ -2,7 +2,6 @@
 " Settings
 " --------
 
-
 set number
 set relativenumber
 
